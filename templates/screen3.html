@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kooperation testen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<body>
+    <p>Ergebnis:{{ win }}</p>
+    <p>Gewinn:{{ prize }}</p>
+    <p>Gewinnzahl:{{ winnumber }}</p>
+    <p>Danke für's Teilnehmen</p>
+    <div>
+        <h1>Fragebogen</h1>
+        <form method="post">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name"><br><br>
+            <label for="geschlecht">Geschlecht: </label>
+            <input type="text" name="sex" id="geschlecht"><br><br>
+            <label for="alter">Alter: </label>
+            <input type="text" name="age" id="alter"><br><br>
+            <label for="kursnummer">Kursnummer: </label>
+            <input type="text" name="classnumber" id="kursnummer"><br><br>
+            <label for="kenntnis">Kanntest du das Zahlenwahlspiel schon? </label>
+            <input type="text" name="knowledge" id="kenntnis" ><br><br>
+            <label for="kooperiert">Hast du kooperiert?</label>
+            <input type="text" name="cooperation" id="kooperiert" ><br><br>
+            <label for="anzahl">Wenn ja, mit wie vielen Personen? </label>
+            <input type="text" name="amount" id="anzahl"><br><br>
+            <label for="zahl">Wenn nein, welche Zahl hast du gewählt? </label>
+            <input type="text" name="number" id="zahl"><br><br>
+            <label for="grund">Warum bzw. warum nicht? </label>
+            <input type="text" name="reason" id="grund" size="20"><br><br>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>
