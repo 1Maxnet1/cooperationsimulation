@@ -117,32 +117,33 @@ def playersguess(enemies): #needs an integer of the amount of the enemies
 #    print(str(i) + ' : ' + str(cnt[i]))
 
 
-def guessing(enemielist, ownguess):
-    enemielist[len(enemielist):] = [ownguess]#needs a list of the guess of the enemies and adds the own guess to this list at the end
-    return enemielist# returns a list of all guesses, where your guess is at the end
+def addownguess(enemylist, ownguess):
+    enemylist[len(enemylist):] = [ownguess] #needs a list of the guess of the enemies and adds the own guess to this list at the end
+    return enemylist # returns a list of all guesses, where your guess is at the end
 
 
-def findwinnumber(guess):#needs a full list of guesses
-        winnumber = sum(guess) / len(guess) * 2 / 3
-        return winnumber # returns the analytic number which would win
+def findwinnumber(guesses): #needs a full list of guesses
+    winnumber = sum(guesses) / len(guesses) * 2 / 3
+    return winnumber # returns the analytic number which would win
 
 
-def closestguess(guess,winparameter):#needs a full list of guesses and the number which would win the game
-    absolutevaluewinner = 100
-    winnersposition = []
-    for i in range(10):
-        if abs(guess[i] - winparameter) < float(absolutevaluewinner):
-            absolutevaluewinner = abs(guess[i] - winparameter)
-            winnersposition = []
-            winnersposition[len(winnersposition):] = [i]
-        elif abs(guess[i] - winparameter) == absolutevaluewinner:
-            winnersposition[len(winnersposition):] = [i]
+def closestguess(guesses, winnumber): #needs a full list of guesses and the number which would win the game
+    minimumdistancetowinnumber = 100
+    winnerspositions = []
+    for i in range(len(guesses)):
+        differencetowinnumber = abs(guesses[i] - winnumber)
+        if differencetowinnumber < float(minimumdistancetowinnumber):
+            minimumdistancetowinnumber = differencetowinnumber
+            winnerspositions = [] # need to delete previous winners, as we found one that is closer to the winnumber
+            winnerspositions[len(winnerspositions):] = [i]
+        elif differencetowinnumber == minimumdistancetowinnumber:
+            winnerspositions[len(winnerspositions):] = [i]
         else:
             pass
-    #print(winnersposition)
-    return winnersposition #returns a list of the position of the winners of the handed over
+    #print(winnerspositions)
+    return winnerspositions #returns a list of the position of the winners of the handed over
 
 
-def findprize(winnerspostions):#needs a list of the winner's positions
+def calculateprize(winnerspostions):#needs a list of the winner's positions
     prize = 100 / len(winnerspostions)
     return prize # returns the prize which each winner gets

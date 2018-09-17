@@ -71,7 +71,7 @@ def welcomepost():
 def kooperationpost():
     amount = int(request.form['text'])
     print('Kooperierende:' + str(amount))
-    guesslist = lib.guessing(lib.playersguess(9 - amount),0)
+    guesslist = lib.addownguess(lib.playersguess(9 - amount), 0)
     for i in range(amount):
         guesslist[len(guesslist):] = [0]
     print('Rateliste')
@@ -79,14 +79,14 @@ def kooperationpost():
     global winnumber
     winnumber = lib.findwinnumber(guesslist)
     print(winnumber)
-    closeguess = lib.closestguess(guess=guesslist,winparameter=winnumber)
+    closeguess = lib.closestguess(guesses=guesslist, winnumber=winnumber)
     print(closeguess)
     if 9 in closeguess or len(closeguess) == 10:
         global win
         win = 'Gewonnen'
         print('Du hast ' + win)
         global prize
-        prize = lib.findprize(closeguess)
+        prize = lib.calculateprize(closeguess)
     return redirect(url_for('result'))
 
 
@@ -94,18 +94,18 @@ def kooperationpost():
 def nichtkooperationpost():
     guess = int(request.form['text'])
     print('Eingabe: ' + str(guess))
-    guesslist = lib.guessing(lib.playersguess(9),guess)
+    guesslist = lib.addownguess(lib.playersguess(9), guess)
     print('Ratelist: ')
     print(guesslist)
     global winnumber
     winnumber = lib.findwinnumber(guesslist)
     print('Gewinnzahl:' + str(winnumber))
-    if 10 in lib.closestguess(guess=guesslist,winparameter=winnumber):
+    if 10 in lib.closestguess(guesses=guesslist, winnumber=winnumber):
         global win
         win = 'Gewonnen'
         print(win)
         global prize
-        prize = lib.findprize(lib.closestguess(guess=guess,winparameter=winnumber))
+        prize = lib.calculateprize(lib.closestguess(guesses=guess, winnumber=winnumber))
     return redirect(url_for('result'))
 
 
@@ -141,7 +141,7 @@ def end():
     amount = knowingplayeramount - 1
     for i in range(repitition):
         print('Kooperierende:' + str(amount))
-        guesslist = lib.guessing(lib.playersguess(9 - amount), 0)
+        guesslist = lib.addownguess(lib.playersguess(9 - amount), 0)
         for i in range(amount):
             guesslist[len(guesslist):] = [0]
         print('Rateliste')
@@ -149,11 +149,11 @@ def end():
         global simwinnumber
         simwinnumber = lib.findwinnumber(guesslist)
         print(simwinnumber)
-        closeguess = lib.closestguess(guess=guesslist, winparameter=simwinnumber)
+        closeguess = lib.closestguess(guesses=guesslist, winnumber=simwinnumber)
         print(closeguess)
         global simprize
         if 9 in closeguess or len(closeguess) == 10:
-            simprize = lib.findprize(closeguess)
+            simprize = lib.calculateprize(closeguess)
         else:
             simprize = 0
         print(simprize)
@@ -163,10 +163,10 @@ def end():
     print(averagewin)
     #    distribution = lib.playersguess(playeramount - knowingplayeramount)
     #    for i in range(knowingplayeramount):
-    #        distribution = lib.guessing(distribution, 0)
+    #        distribution = lib.addownguess(distribution, 0)
     #    print(distribution)
     #    winnernumber = lib.findwinnumber(distribution)
-    #    prize = lib.findprize(lib.closestguess(distribution,winnernumber))
+    #    prize = lib.calculateprize(lib.closestguess(distribution,winnernumber))
     #    print(prize)
         #with open('.csv', 'a', newline='') as csvfile:
         #    writer = csv.writer(csvfile)
