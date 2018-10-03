@@ -3,6 +3,7 @@ Cooperative guessing Game
 
 # Used Libraries
 - Flask
+- numpy
 
 # How to use
 Prerequisites flask and numpy: 
